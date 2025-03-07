@@ -4,4 +4,5 @@ public interface AIRepository {
     String getMessage(String prompt, String context);
 
     boolean isAvailable();
+    
 }

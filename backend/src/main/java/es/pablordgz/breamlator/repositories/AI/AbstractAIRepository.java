@@ -13,4 +13,10 @@ public abstract class AbstractAIRepository implements AIRepository {
     public boolean isAvailable() {
         return !EnvVariableRetriever.getVariable(AIName + "_API_KEY").equals(EnvVariableRetriever.NOT_FOUND);
     }
+    
+    protected String getAPIKey() {
+        return EnvVariableRetriever.getVariable(AIName + "_API_KEY");
+    }
+
+
 }

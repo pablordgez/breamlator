@@ -16,11 +16,10 @@ public class HTTPRequester {
     public enum Method {
         GET,
         POST
-
     }
 
 
-    public static JSONArray request(String url, Method method, Map<String, String> body) throws IOException {
+    public static JSONArray request(String url, Method method, Map<String, Object> body) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = null;
         if (method == Method.GET) {
@@ -33,7 +32,7 @@ public class HTTPRequester {
         HttpResponse<String> response = null;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | IOException e) {
             HashMap<String, String> result = new HashMap<>();
             JSONArray array = new JSONArray();
             result.put("success", "false");
@@ -43,19 +42,19 @@ public class HTTPRequester {
         return buildResponseBody(response.body());
     }
 
-    private static String buildPostBody(Map<String, String> body) {
+    private static String buildPostBody(Map<String, Object> body) {
         JSONObject obj = new JSONObject(body);
         return obj.toString();
 
     }
 
-    private static String buildGetURL(String url, Map<String, String> params) {
+    private static String buildGetURL(String url, Map<String, Object> params) {
         StringBuilder sb = new StringBuilder();
         sb.append(url);
-        for (Map.Entry<String, String> entry : params.entrySet()) {
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
             sb.append(URLEncoder.encode(entry.getKey()));
             sb.append("=");
-            sb.append(URLEncoder.encode(entry.getValue()));
+            sb.append(URLEncoder.encode(entry.getValue().toString()));
             sb.append("&");
         }
         if (sb.charAt(sb.length() - 1) == '&') {
