@@ -2,6 +2,7 @@ package es.pablordgz.breamlator.repositories.AI;
 
 import es.pablordgz.breamlator.utils.EnvVariableRetriever;
 
+
 public abstract class AbstractAIRepository implements AIRepository {
     private final String AIName;
 
@@ -13,7 +14,7 @@ public abstract class AbstractAIRepository implements AIRepository {
     public boolean isAvailable() {
         return !EnvVariableRetriever.getVariable(AIName + "_API_KEY").equals(EnvVariableRetriever.NOT_FOUND);
     }
-    
+
     protected String getAPIKey() {
         return EnvVariableRetriever.getVariable(AIName + "_API_KEY");
     }
