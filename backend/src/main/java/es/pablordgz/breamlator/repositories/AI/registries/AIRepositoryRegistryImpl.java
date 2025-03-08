@@ -4,7 +4,9 @@ import es.pablordgz.breamlator.repositories.AI.AIRepository;
 import es.pablordgz.breamlator.repositories.AI.GeminiAIRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -22,5 +24,12 @@ public class AIRepositoryRegistryImpl implements AIRepositoryRegistry {
             return repositories.get(name);
         }
         return null;
+    }
+
+    @Override
+    public List<String> getAllAINames() {
+        List<String> names = new ArrayList<>();
+        names.addAll(repositories.keySet());
+        return names;
     }
 }
