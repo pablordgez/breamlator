@@ -12,7 +12,7 @@ import java.util.List;
 public class LanguageService {
     private final LanguageRepository languageRepository;
 
-    public LanguageService(@Qualifier("languageRepositoryImpl") LanguageRepository languageRepository) {
+    public LanguageService(@Qualifier("languageRepositorySQL") LanguageRepository languageRepository) {
         this.languageRepository = languageRepository;
     }
 

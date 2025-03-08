@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
+@Repository("AIRepositoryRegistryImpl")
 public class AIRepositoryRegistryImpl implements AIRepositoryRegistry {
 
     private final Map<String, AIRepository> repositories = new HashMap<>();

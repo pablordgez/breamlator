@@ -8,6 +8,8 @@ public interface AIRepository {
 
     String getMessage(String prompt, String context, String apiKey);
 
+    String getMessage(String prompt, String context, String apiKey, String model);
+
     boolean isAvailable();
 
     String getName();

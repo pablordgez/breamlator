@@ -22,6 +22,9 @@ public class AITranslationService implements TranslationService {
         } else {
             AIRepository aiRepo = registry.getAIRepository(params.get("AI_REPOSITORY"));
             if (params.containsKey(aiRepo.getName() + "_API_KEY")) {
+                if (params.containsKey("model")) {
+                    return aiRepo.getMessage(text, AITranslationContextBuilder.getContext(language), params.get(aiRepo.getName() + "_API_KEY"), params.get("model"));
+                }
                 return aiRepo.getMessage(text, AITranslationContextBuilder.getContext(language), params.get(aiRepo.getName() + "_API_KEY"));
             } else {
                 if (!aiRepo.isAvailable()) {

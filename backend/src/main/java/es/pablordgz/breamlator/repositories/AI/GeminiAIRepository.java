@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.Map;
 
-@Repository
+@Repository("geminiAIRepository")
 public class GeminiAIRepository extends AbstractAIRepository {
 
     private final String baseURL = "https://generativelanguage.googleapis.com/v1beta/models/";
-    private String model = "gemini-2.0-flash";
+    private final String model = "gemini-2.0-flash";
 
     public GeminiAIRepository() {
         super("GEMINI");
@@ -25,6 +25,11 @@ public class GeminiAIRepository extends AbstractAIRepository {
 
     @Override
     public String getMessage(String prompt, String context, String apiKey) {
+        return getMessage(prompt, context, apiKey, model);
+    }
+
+    @Override
+    public String getMessage(String prompt, String context, String apiKey, String model) {
         Map<String, Object> params = formatPrompt(prompt, formatContext(context));
         JSONArray response = HTTPRequester.request(baseURL + model + ":generateContent" + "?key=" + apiKey, HTTPRequester.Method.POST, params);
         if (response.getJSONObject(0).has("success") && response.getJSONObject(0).getString("success").equals("false")) {
@@ -54,10 +59,6 @@ public class GeminiAIRepository extends AbstractAIRepository {
         contents.put("parts", contentsParts);
         context.put("contents", contents);
         return context;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
 }
