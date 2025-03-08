@@ -1,7 +1,7 @@
 package es.pablordgz.breamlator.repositories.Language;
 
 import es.pablordgz.breamlator.entities.Language;
-import es.pablordgz.breamlator.repositories.AI.GeminiAIRepository;
+import es.pablordgz.breamlator.repositories.AI.registries.AIRepositoryRegistryImpl;
 import es.pablordgz.breamlator.services.translation.AITranslationService;
 import es.pablordgz.breamlator.services.translation.TranslationService;
 import jakarta.annotation.PostConstruct;
@@ -18,7 +18,7 @@ public class LanguageRepositoryImpl implements LanguageRepository {
     @PostConstruct
     public void init() {
         languages = new ArrayList<>();
-        TranslationService translationService = new AITranslationService(new GeminiAIRepository());
+        TranslationService translationService = new AITranslationService(new AIRepositoryRegistryImpl());
         languages.add(new Language("Old English", "Shakespeare English", translationService));
         languages.add(new Language("Pirate", "Talk like a pirate", translationService));
         languages.add(new Language("Poetry", "Talk using rhymes", translationService));

@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 public interface AIRepository {
     String getMessage(String prompt, String context);
 
+    String getMessage(String prompt, String context, String apiKey);
+
     boolean isAvailable();
+
+    String getName();
 
 }

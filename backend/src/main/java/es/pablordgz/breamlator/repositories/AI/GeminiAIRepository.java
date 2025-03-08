@@ -20,12 +20,21 @@ public class GeminiAIRepository extends AbstractAIRepository {
 
     @Override
     public String getMessage(String prompt, String context) {
+        return getMessage(prompt, context, getAPIKey());
+    }
+
+    @Override
+    public String getMessage(String prompt, String context, String apiKey) {
         Map<String, Object> params = formatPrompt(prompt, formatContext(context));
-        JSONArray response = HTTPRequester.request(baseURL + model + ":generateContent" + "?key=" + getAPIKey(), HTTPRequester.Method.POST, params);
+        JSONArray response = HTTPRequester.request(baseURL + model + ":generateContent" + "?key=" + apiKey, HTTPRequester.Method.POST, params);
         if (response.getJSONObject(0).has("success") && response.getJSONObject(0).getString("success").equals("false")) {
             return "The message could not be retrieved";
         }
-        return response.getJSONObject(0).getJSONArray("candidates").getJSONObject(0).getJSONObject("content").getJSONArray("parts").getJSONObject(0).getString("text");
+        try {
+            return response.getJSONObject(0).getJSONArray("candidates").getJSONObject(0).getJSONObject("content").getJSONArray("parts").getJSONObject(0).getString("text");
+        } catch (Exception e) {
+            return "The message could not be retrieved";
+        }
     }
 
     private Map<String, Object> formatContext(String context) {

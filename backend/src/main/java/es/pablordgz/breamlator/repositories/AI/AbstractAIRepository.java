@@ -19,5 +19,9 @@ public abstract class AbstractAIRepository implements AIRepository {
         return EnvVariableRetriever.getVariable(AIName + "_API_KEY");
     }
 
+    public String getName() {
+        return AIName;
+    }
+
 
 }
