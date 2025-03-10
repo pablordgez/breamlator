@@ -1,0 +1,14 @@
+<div class="translator-container container">
+    <select #language_select class="language-select">
+        <option disabled selected>Select the language</option>
+        @for(language of availableLanguages; track $index){
+          <option>{{language}}</option>
+      }
+      </select>
+      <div class="translator-boxes">
+        <textarea #input_text name="input-text" class="form-control not-resizable" placeholder="Write your text here" [rows]="textAreaRows"></textarea>
+        <button class="btn btn-primary translate-button" (click)="translate()">Translate!</button>
+        <textarea #output_text class="form-control not-resizable" placeholder="Your translation" readonly [rows]="textAreaRows"></textarea>
+      </div>
+      
+</div>

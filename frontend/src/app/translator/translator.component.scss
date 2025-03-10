@@ -1,0 +1,30 @@
+.translator-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    margin-top: 1em;
+}
+
+.translator-boxes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.language-select{
+    width: max-content;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.translate-button{
+    height: 4em;
+    align-self: center;
+}
+
+@media(max-width: 768px){
+    .translator-boxes{
+        flex-direction: column;
+    }
+} 

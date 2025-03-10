@@ -5,13 +5,11 @@ import es.pablordgz.breamlator.services.language.LanguageService;
 import es.pablordgz.breamlator.services.translation.TranslationService;
 import es.pablordgz.breamlator.services.translation.registry.TranslationServiceRegistry;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 public class TranslationController {
 
